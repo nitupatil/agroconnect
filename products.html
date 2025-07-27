@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products - Crop Connect Agro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --dark-green: #0B8F3C;
+            --yellow: #FFD200;
+            --orange: #F39200;
+            --dark-teal: #004F64;
+            --dark-gray: #333333;
+            --bright-green: #76BC21;
+            --light-gray: #F4F4F4;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark-green);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .company-name {
+            color: white;
+            font-weight: 600;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        
+        nav ul li a:hover {
+            color: var(--yellow);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--yellow);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            color: var(--dark-teal);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--yellow);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            padding: 1.5rem;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .product-card-content {
+            padding: 1.5rem;
+        }
+        
+        .product-card h3 {
+            color: var(--dark-teal);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-card .subtitle {
+            color: var(--orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        /* Product Detail Section */
+        .product-detail {
+            margin: 3rem 0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        .product-detail.active {
+            display: flex;
+            flex-wrap: wrap;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+        }
+        
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+        }
+        
+        .product-info h2 {
+            color: var(--dark-teal);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .product-info .subtitle {
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+            font-size: 1.1rem;
+        }
+        
+        .product-info .description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .product-info .description p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--yellow);
+            color: var(--dark-gray);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--orange);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            opacity: 0;
+            animation: modalOpen 0.3s forwards;
+        }
+        
+        @keyframes modalOpen {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header h2 {
+            color: var(--dark-teal);
+            font-size: 1.5rem;
+        }
+        
+        .close-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: transform 0.3s;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+            color: var(--orange);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-teal);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--dark-green);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--dark-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--bright-green);
+            transform: translateY(-2px);
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .success-message i {
+            font-size: 3rem;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+        
+        .success-message h3 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .success-message p {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Status Message */
+        #statusMsg {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+            display: block !important;
+        }
+        
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+            display: block !important;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: var(--yellow);
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .footer-section p, .footer-section a {
+            margin-bottom: 0.8rem;
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--yellow);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--yellow);
+            color: var(--dark-gray);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--dark-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--bright-green);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark-green);
+                transition: all 0.3s;
+                z-index: 999;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 2rem;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .product-detail {
+                flex-direction: column;
+            }
+            
+            .product-image, .product-info {
+                min-width: 100%;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            .company-name {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="https://i.ibb.co/ynvT8gnp/Logo-removebg-preview.png" alt="Crop Connect Agro Logo" class="logo">
+            </a>
+            <span class="company-name">CROP CONNECT AGRO PVT.LTD</span>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Our Premium Agro Products</h1>
+        
+        <!-- Product Detail Section (Initially hidden) -->
+        <div class="product-detail" id="product-detail">
+            <div class="product-image">
+                <img id="detail-image" src="" alt="Product Image">
+            </div>
+            <div class="product-info">
+                <h2 id="detail-title">Product Name</h2>
+                <span class="subtitle" id="detail-subtitle"></span>
+                <div class="description" id="detail-description">
+                    Product description will appear here...
+                </div>
+                <button class="btn" id="get-product-btn">
+                    <i class="fas fa-shopping-cart"></i> Get Product
+                </button>
+            </div>
+        </div>
+        
+        <!-- Product Grid -->
+        <div class="product-grid">
+            <div class="product-card" data-product="connect-stic">
+                <img src="https://i.ibb.co/d0x6q25P/Connect-STIC.png" alt="Connect STIC" class="product-card-img">
+                <div class="product-card-content">
+                    <h3>Connect STIC</h3>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="root-connect">
+                <img src="https://i.ibb.co/0yBy5WX4/Root-connect.jpg" alt="Root Connect" class="product-card-img">
+                <div class="product-card-content">
+                    <h3>Root Connect</h3>
+                    <span class="subtitle">Potassium Humate 98%</span>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="amino-connect">
+                <img src="https://i.ibb.co/jkRx542k/Amino-Connect.jpg" alt="Amino Connect" class="product-card-img">
+                <div class="product-card-content">
+                    <h3>Amino Connect</h3>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="root-connect-plus">
+                <img src="https://i.ibb.co/DH1YWpG1/Root-Connect-Plus.png" alt="Root Connect Plus" class="product-card-img">
+                <div class="product-card-content">
+                    <h3>Root Connect Plus</h3>
+                    <span class="subtitle">Super Potassium-Fulvic-Humate 90% WP</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enquiry Modal -->
+    <div class="modal" id="enquiryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Product Enquiry</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            
+            <form id="enquiryForm">
+                <input type="hidden" id="productName" name="productName" value="">
+                
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message (Optional)</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Enquiry
+                </button>
+                
+                <div id="statusMsg"></div>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Thank You!</h3>
+                <p>Your enquiry has been submitted successfully. Our team will contact you soon.</p>
+                <button class="btn" id="closeSuccessBtn">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> At Post Fulambri, Tq Fulambri, Dist Chhatrapati Sambhajinagar</p>
+                <p><i class="fas fa-phone"></i> +91 7588503109</p>
+                <p><i class="fas fa-envelope"></i> hello.ccagro@gmail.com</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Crop Connect Agro PVT. LTD. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // Product Data
+        const products = {
+            "connect-stic": {
+                title: "Connect STIC",
+                subtitle: "",
+                image: "https://i.ibb.co/d0x6q25P/Connect-STIC.png",
+                description: `
+                    <p><strong>पिकांसाठी फायदे :</strong></p>
+                    <p>🌼 कनेक्ट स्टीक हे उच्च दर्जाचे सिलिकॉन वर आधारित नॉन आयोनिक स्प्रेडर, स्टिकर व ॲक्टिवेटर, पेनीट्रेटर आहे.</p>
+                    <p>🌼 कनेक्ट स्टीक हे फवारणीच्या औषधांची कार्यक्षमता ३० ते ३५ टक्क्यांनी वाढवते ज्यामुळे औषधांची चांगल्या प्रमाणात बचत होते.</p>
+                    <p>🌼 कनेक्ट स्टीक विशेषतः : औषधी पानावर पसरणे व पानाच्या आत मध्ये त्याला एंट्रीट्रेट करणे यासाठी महत्त्वाची भूमिका निभावते.</p>
+                    <p><strong>प्रमाण :</strong> ५ मिली / २० लिटर पाण्यासाठी</p>
+                    <p><strong>उपलब्ध पॅकिंग :</strong> १०० मिली, २५० मिली</p>
+                `
+            },
+            "root-connect": {
+                title: "Root Connect",
+                subtitle: "Potassium Humate 98%",
+                image: "https://i.ibb.co/0yBy5WX4/Root-connect.jpg",
+                description: `
+                    <p><strong>पिकांसाठी फायदे :</strong></p>
+                    <p>🔹 मातीची गुणवत्ता सुधारते.</p>
+                    <p>🔹 रसायनांच्या वापरासाठी उपयुक्त.</p>
+                    <p>🔹 पर्यावरणास अनुकूल.</p>
+                    <p>🔹 नैसर्गिक रित्या तयार झालेले असल्यामुळे, पर्यावरणासाठी सुरक्षित आहे.</p>
+                    <p>🔹 मुळे वाढ चांगली होते, ज्यामुळे अन्नद्रव्य शोषण घेण्याची क्षमता वाढते.</p>
+                    <p>🔹 पाण्याची उपलब्धता आणि वायूवहन सुधारते.</p>
+                `
+            },
+            "amino-connect": {
+                title: "Amino Connect",
+                subtitle: "",
+                image: "https://i.ibb.co/jkRx542k/Amino-Connect.jpg",
+                description: `
+                    <p><strong>पिकांसाठी फायदे :</strong></p>
+                    <p>🟢 रोगप्रतिकारकशक्ती :<br>
+                    अमिनो ऍसिड पिकांची रोगप्रतिकारकशक्ती वाढवते, त्यामुळे त्यांना रोग आणि कीटकांपासून संरक्षण मिळते.</p>
+                    <p>🟢 तणाव सहनशीलता :<br>
+                    ते पिकांना तणावपूर्ण परिस्थितीत जसे की उष्णता, दुष्काळ किंवा कीड–रोग यांचा सामना करण्यास मदत करते.</p>
+                    <p>🟢 पोषक तत्वांचे शोषण :<br>
+                    अमिनो ऍसिड, खनिजे आणि इतर पोषक तत्वांचे शोषण सुधारते.</p>
+                    <p>🟢 वाढीला प्रोत्साहन :<br>
+                    ते वनस्पतीच्या वाढीस आणि विकासास मदत करते, त्यामुळे अधिक जोमदार वाढ आणि चांगले उत्पादन मिळते.</p>
+                    <p>🟢 उत्पादकता :<br>
+                    अमिनो ऍसिडचा वापर करून, शेतकरी अधिक चांगले आणि मोठे उत्पादन मिळवू शकतात.</p>
+                    <p>🟢 फळांचा आकार :<br>
+                    अमिनो ऍसिड फळांचा आकार वाढवण्यास मदत करते.</p>
+                `
+            },
+            "root-connect-plus": {
+                title: "Root Connect Plus",
+                subtitle: "Super Potassium-Fulvic-Humate 90% WP",
+                image: "https://i.ibb.co/DH1YWpG1/Root-Connect-Plus.png",
+                description: `
+                    <p><strong>पिकांसाठी फायदे :</strong></p>
+                    <p>🔹 हे एक बहुउपयोगी, पोटॅश भरपूर असलेले Humic macro granuals आहे. यामध्ये ह्युमिक ऍसिड 65% व फुल्विक ऍसिड 10% आहे.</p>
+                    <p>🔹 रूट कनेक्ट प्लस मुळे जमिनीतील सूक्ष्मजीव कार्याचे प्रमाण वाढते परिणामी जमिनीतले सुपीकता येते.</p>
+                    <p>🔹 रूट कनेक्ट प्लस मुळे जमिनीचे पाणी धरून ठेवण्याचे प्रमाण वाढते.</p>
+                    <p>🔹 रूट कनेक्ट प्लस हे जमिनीतील सूक्ष्म जीवांना पोषक तत्त्वे उपलब्ध करून देते परिणामी तंतुमय पांढऱ्या मुळ्यांची वाढ होऊन पिकांचे जोमदार वाढते.</p>
+                    <p>🔹 रूट कनेक्ट प्लस हे पिकातील एन्झाईम्स व हार्मोन्सची उत्सर्जीत क्रिया वाढवते परिणामी पीक चांगले येते व उत्पादन वाढीस त्याचा फायदा होतो.</p>
+                    <p>🔹 बिय प्रक्रियेसाठी उपयुक्त व गुणकारी.</p>
+                `
+            }
+        };
+
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const productCards = document.querySelectorAll('.product-card');
+        const productDetail = document.getElementById('product-detail');
+        const detailImage = document.getElementById('detail-image');
+        const detailTitle = document.getElementById('detail-title');
+        const detailSubtitle = document.getElementById('detail-subtitle');
+        const detailDescription = document.getElementById('detail-description');
+        const getProductBtn = document.getElementById('get-product-btn');
+        const enquiryModal = document.getElementById('enquiryModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const enquiryForm = document.getElementById('enquiryForm');
+        const productNameInput = document.getElementById('productName');
+        const messageInput = document.getElementById('message');
+        const successMessage = document.getElementById('successMessage');
+        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+        const backToTop = document.getElementById('backToTop');
+        const statusMsg = document.getElementById('statusMsg');
+
+        // Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Show Product Details
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const productId = card.getAttribute('data-product');
+                const product = products[productId];
+                
+                detailImage.src = product.image;
+                detailImage.alt = product.title;
+                detailTitle.textContent = product.title;
+                detailSubtitle.textContent = product.subtitle || '';
+                detailDescription.innerHTML = product.description;
+                productNameInput.value = product.title;
+                
+                // Set the product name in the message field
+                messageInput.value = `I'm interested in ${product.title}`;
+                
+                // Reset form status when selecting a new product
+                statusMsg.style.display = 'none';
+                statusMsg.className = '';
+                successMessage.style.display = 'none';
+                enquiryForm.style.display = 'block';
+                
+                productDetail.classList.add('active');
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Open Enquiry Modal
+        getProductBtn.addEventListener('click', () => {
+            enquiryModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close Modal
+        closeBtn.addEventListener('click', () => {
+            enquiryModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close Modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === enquiryModal) {
+                enquiryModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close Success Message
+        closeSuccessBtn.addEventListener('click', () => {
+            enquiryModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            successMessage.style.display = 'none';
+            enquiryForm.style.display = 'block';
+            statusMsg.style.display = 'none';
+        });
+
+        // Form Submission
+        enquiryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            statusMsg.innerText = "Submitting...";
+            statusMsg.className = "";
+            statusMsg.style.display = "block";
+            
+            const formData = new FormData(enquiryForm);
+            
+            fetch("https://script.google.com/macros/s/AKfycbz9KNEYbHVGG85-GPSoNadZli_EL9DG2A6CE7-qdN_c_B7sjFc6SqqF3EI5xwNLkFnI/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(text => {
+                if (text.toLowerCase().includes("success")) {
+                    statusMsg.innerText = "✅ Enquiry submitted successfully!";
+                    statusMsg.className = "success";
+                    enquiryForm.reset();
+                    
+                    // Show success message
+                    enquiryForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    statusMsg.innerText = "❌ Failed: " + text;
+                    statusMsg.className = "error";
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                statusMsg.innerText = "❌ Network error. Please try again.";
+                statusMsg.className = "error";
+            });
+        });
+
+        // Back to Top Button
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

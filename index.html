@@ -317,8 +317,7 @@
         .product-slider-track {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Smooth scrolling without snapping friction */
             gap: 1.5rem;
             padding: 1rem 0 2rem 0;
             scrollbar-width: none; /* Firefox */
@@ -331,7 +330,6 @@
         .product-slide-card {
             flex: 0 0 calc(25% - 1.125rem); /* 4 cards per view by default */
             min-width: 250px;
-            scroll-snap-align: start;
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
@@ -340,6 +338,7 @@
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
         }
 
         .product-slide-card:hover {
@@ -682,9 +681,6 @@
                 right: 20px;
                 font-size: 24px;
             }
-            .product-slide-card {
-                flex: 0 0 calc(50% - 0.75rem); /* 2 cards */
-            }
             .product-slider-wrapper {
                 padding: 0 20px;
             }
@@ -714,8 +710,29 @@
             .testimonials-container {
                 grid-template-columns: 1fr;
             }
+            
+            /* SHOW 2 CARDS ON MOBILE */
             .product-slide-card {
-                flex: 0 0 100%; /* 1 card */
+                flex: 0 0 calc(50% - 0.75rem); /* Exactly 2 cards per view */
+                min-width: 140px; /* Prevent getting too squished */
+            }
+            .product-img-container {
+                height: 140px; /* Smaller image container for mobile */
+                padding: 0.8rem;
+            }
+            .product-info {
+                padding: 1rem 0.5rem;
+            }
+            .product-info h3 {
+                font-size: 1rem;
+            }
+            .product-info .subtitle {
+                font-size: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            .product-info .btn {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -801,355 +818,355 @@
             
             <div class="product-slider-track">
                 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=banjar-connect'">
                     <div class="product-img-container">
                         <img src="images/banjar connect.jpg" alt="Banjar Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Banjar Connect</h3>
                         <span class="subtitle">बंजर कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=banjar-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=liger-connect'">
                     <div class="product-img-container">
                         <img src="images/liger connect.jpg" alt="Liger Connect" class="product-img" onerror="this.src='https://via.placeholder.com/280x220?text=Image+Not+Found'">
                     </div>
                     <div class="product-info">
                         <h3>Liger Connect</h3>
                         <span class="subtitle">लाईगर कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=liger-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-anti-ka'">
                     <div class="product-img-container">
                         <img src="images/connect anti-ka.jpg" alt="Connect Anti-KA" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Anti-KA</h3>
                         <span class="subtitle">कनेक्ट अँटी-का</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-anti-ka" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=nemato-connect'">
                     <div class="product-img-container">
                         <img src="images/nemato connect.jpg" alt="Nemato Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Nemato Connect</h3>
                         <span class="subtitle">निमॅटो कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=nemato-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-step-two'">
                     <div class="product-img-container">
                         <img src="images/connect step-two.jpg" alt="Connect Step-Two" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Step-Two</h3>
                         <span class="subtitle">स्टेप-टू कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-step-two" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=seaweed-connect'">
                     <div class="product-img-container">
                         <img src="images/seaweed connect.jpg" alt="Seaweed Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Seaweed Connect</h3>
                         <span class="subtitle">सिविड कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=seaweed-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-zyme'">
                     <div class="product-img-container">
                         <img src="images/connect zyme.jpg" alt="Connect Zyme" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Zyme</h3>
                         <span class="subtitle">कनेक्ट झाइम</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-zyme" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=asco-connect'">
                     <div class="product-img-container">
                         <img src="images/asco connect.jpg" alt="Asco Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Asco Connect</h3>
                         <span class="subtitle">अस्को कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=asco-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=all-connect'">
                     <div class="product-img-container">
                         <img src="images/all connect.jpg" alt="All Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>All Connect</h3>
                         <span class="subtitle">ऑल कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=all-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-sw-gr'">
                     <div class="product-img-container">
                         <img src="images/connect sw gr.jpg" alt="Connect SW GR" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect SW GR</h3>
                         <span class="subtitle">कनेक्ट एस. डब्ल्यू. जी. आर.</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-sw-gr" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-block-blaster'">
                     <div class="product-img-container">
                         <img src="images/connect block blaster.jpg" alt="Connect Block Blaster" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Block Blaster</h3>
                         <span class="subtitle">कनेक्ट ब्लॉक ब्लास्टर</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-block-blaster" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=carbo-n-connect'">
                     <div class="product-img-container">
                         <img src="images/carbo-n connect.jpg" alt="Carbo-N Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Carbo-N Connect</h3>
                         <span class="subtitle">कार्बो-एन कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=carbo-n-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=hi-vaa-connect'">
                     <div class="product-img-container">
                         <img src="images/hi-vaa connect.jpg" alt="Hi-VAA Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Hi-VAA Connect</h3>
                         <span class="subtitle">हाय-व्ही ए ए कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=hi-vaa-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-alffa'">
                     <div class="product-img-container">
                         <img src="images/connect alffa.jpg" alt="Connect Alffa" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Alffa</h3>
                         <span class="subtitle">कनेक्ट अल्फा</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-alffa" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=amino-connect'">
                     <div class="product-img-container">
                         <img src="images/amino connect.jpg" alt="Amino Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Amino Connect</h3>
                         <span class="subtitle">अमिनो कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=amino-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=amino-connect-l'">
                     <div class="product-img-container">
                         <img src="images/amino connect-l.jpg" alt="Amino Connect-L" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Amino Connect-L</h3>
                         <span class="subtitle">अमिनो कनेक्ट- एल</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=amino-connect-l" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-fert'">
                     <div class="product-img-container">
                         <img src="images/connect fert.jpg" alt="Connect Fert" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Fert</h3>
                         <span class="subtitle">कनेक्ट फर्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-fert" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-baazigar'">
                     <div class="product-img-container">
                         <img src="images/connect baazigar.jpg" alt="Connect Baazigar" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Baazigar</h3>
                         <span class="subtitle">कनेक्ट बाजीगर</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-baazigar" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-chairman'">
                     <div class="product-img-container">
                         <img src="images/connect chairman.jpg" alt="Connect Chairman" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Chairman</h3>
                         <span class="subtitle">कनेक्ट चेअरमन</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-chairman" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=root-connect'">
                     <div class="product-img-container">
                         <img src="images/root connect.jpg" alt="Root Connect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Root Connect</h3>
                         <span class="subtitle">रूट कनेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=root-connect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=root-connect-plus'">
                     <div class="product-img-container">
                         <img src="images/root connect plus.jpg" alt="Root Connect Plus" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Root Connect Plus</h3>
                         <span class="subtitle">रूट कनेक्ट plus</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=root-connect-plus" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-rx-100'">
                     <div class="product-img-container">
                         <img src="images/connect rx 100.jpg" alt="Connect RX 100" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect RX 100</h3>
                         <span class="subtitle">कनेक्ट आर एक्स 100</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-rx-100" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=root-connect-l'">
                     <div class="product-img-container">
                         <img src="images/root connect-l.jpg" alt="Root Connect-L" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Root Connect-L</h3>
                         <span class="subtitle">रूट कनेक्ट-एल</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=root-connect-l" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-hf-gr'">
                     <div class="product-img-container">
                         <img src="images/connect hf gr.jpg" alt="Connect HF GR" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect HF GR</h3>
                         <span class="subtitle">कनेक्ट एच. एफ. जी. आर</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-hf-gr" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-h-51-gr'">
                     <div class="product-img-container">
                         <img src="images/connect h 51 gr.jpg" alt="Connect H 51 GR" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect H 51 GR</h3>
                         <span class="subtitle">कनेक्ट एच 51 जी आर</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-h-51-gr" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-flora'">
                     <div class="product-img-container">
                         <img src="images/connect flora.jpg" alt="Connect Flora" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Flora</h3>
                         <span class="subtitle">कनेक्ट फ्लोरा</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-flora" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-perfect'">
                     <div class="product-img-container">
                         <img src="images/connect perfect.jpg" alt="Connect Perfect" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Perfect</h3>
                         <span class="subtitle">कनेक्ट परफेक्ट</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-perfect" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-rajdoot'">
                     <div class="product-img-container">
                         <img src="images/connect rajdoot.jpg" alt="Connect Rajdoot" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Rajdoot</h3>
                         <span class="subtitle">कनेक्ट राजदूत</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-rajdoot" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-stic'">
                     <div class="product-img-container">
                         <img src="images/connect stic.jpg" alt="Connect Stic" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Stic</h3>
                         <span class="subtitle">कनेक्ट स्टिक</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-stic" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-sizer'">
                     <div class="product-img-container">
                         <img src="images/connect sizer.jpg" alt="Connect Sizer" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Sizer</h3>
                         <span class="subtitle">कनेक्ट सायझर</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-sizer" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-b'">
                     <div class="product-img-container">
                         <img src="images/connect b.jpg" alt="Connect B" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect B</h3>
                         <span class="subtitle">कनेक्ट बी</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-b" class="btn">View Product</a>
                     </div>
                 </div>
 
-                <div class="product-slide-card">
+                <div class="product-slide-card" onclick="window.location.href='products.html?product=connect-blend'">
                     <div class="product-img-container">
                         <img src="images/connect blend.jpg" alt="Connect Blend" class="product-img">
                     </div>
                     <div class="product-info">
                         <h3>Connect Blend</h3>
                         <span class="subtitle">कनेक्ट ब्लेंड</span>
-                        <a href="products.html" class="btn">View Product</a>
+                        <a href="products.html?product=connect-blend" class="btn">View Product</a>
                     </div>
                 </div>
 

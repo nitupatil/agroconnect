@@ -301,58 +301,68 @@
             display: block;
         }
         
-        /* Products Section */
+        /* Product Carousel Section */
         .products-section {
             padding: 5rem 5%;
             background-color: var(--light-gray);
         }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+
+        .product-slider-wrapper {
+            position: relative;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 45px;
+        }
+
+        .product-slider-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 1.5rem;
+            padding: 1rem 0 2rem 0;
+            scrollbar-width: none; /* Firefox */
         }
         
-        .product-card {
+        .product-slider-track::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+
+        .product-slide-card {
+            flex: 0 0 calc(25% - 1.125rem); /* 4 cards per view by default */
+            min-width: 250px;
+            scroll-snap-align: start;
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
-            animation: fadeInUp 0.5s;
-            animation-fill-mode: both;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
-        .product-card:nth-child(1) { animation-delay: 0.2s; }
-        .product-card:nth-child(2) { animation-delay: 0.4s; }
-        .product-card:nth-child(3) { animation-delay: 0.6s; }
-        .product-card:nth-child(4) { animation-delay: 0.8s; }
-        
-        .product-card:hover {
+
+        .product-slide-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         .product-img-container {
-            height: 200px;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
-            background-color: var(--white);
+            padding: 1.5rem;
+            background-color: white;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
+
         .product-img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
         }
-        
+
         .product-info {
             padding: 1.5rem;
             text-align: center;
@@ -360,18 +370,56 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .product-info h3 {
             color: var(--dark-teal);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
         }
         
+        .product-info .subtitle {
+            color: var(--orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
         .product-info .btn {
             margin-top: auto;
-            padding: 0.6rem;
+            padding: 0.6rem 1.2rem;
             font-size: 0.9rem;
         }
+
+        /* Navigation Buttons */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background-color: var(--dark-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background-color: var(--yellow);
+            color: var(--dark-gray);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { left: 0; }
+        .next-btn { right: 0; }
         
         /* Testimonials */
         .testimonials-section {
@@ -574,9 +622,11 @@
             .hero-content h1 {
                 font-size: 2.4rem;
             }
-            
             .slideshow-container {
                 height: 400px;
+            }
+            .product-slide-card {
+                flex: 0 0 calc(33.333% - 1rem); /* 3 cards */
             }
         }
         
@@ -584,11 +634,9 @@
             header {
                 padding: 1rem;
             }
-            
             .mobile-menu-btn {
                 display: block;
             }
-            
             nav {
                 position: fixed;
                 top: 80px;
@@ -600,42 +648,33 @@
                 z-index: 999;
                 box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
             }
-            
             nav.active {
                 left: 0;
             }
-            
             nav ul {
                 flex-direction: column;
                 padding: 2rem;
             }
-            
             nav ul li {
                 margin: 1rem 0;
             }
-            
             .hero {
                 height: 70vh;
                 padding: 0 2rem;
             }
-            
             .hero-content h1 {
                 font-size: 2rem;
             }
-            
             .hero-content p {
                 font-size: 1rem;
             }
-            
             .slideshow-container {
                 width: 90%;
                 height: 350px;
             }
-            
             .about-content {
                 flex-direction: column;
             }
-            
             .whatsapp-float {
                 width: 50px;
                 height: 50px;
@@ -643,46 +682,49 @@
                 right: 20px;
                 font-size: 24px;
             }
+            .product-slide-card {
+                flex: 0 0 calc(50% - 0.75rem); /* 2 cards */
+            }
+            .product-slider-wrapper {
+                padding: 0 20px;
+            }
+            .prev-btn { left: -10px; }
+            .next-btn { right: -10px; }
         }
         
         @media (max-width: 576px) {
             .hero {
                 height: 60vh;
             }
-            
             .hero-content h1 {
                 font-size: 1.8rem;
             }
-            
             .section-title h2 {
                 font-size: 1.8rem;
             }
-            
             .logo {
                 height: 40px;
             }
-            
             .company-name {
                 font-size: 1rem;
             }
-            
             .slideshow-container {
                 height: 250px;
             }
-            
             .testimonials-container {
                 grid-template-columns: 1fr;
+            }
+            .product-slide-card {
+                flex: 0 0 100%; /* 1 card */
             }
         }
     </style>
 </head>
 <body>
-    <!-- WhatsApp Float Button -->
     <a href="https://wa.me/917588503109" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Header -->
     <header>
         <div class="logo-container">
             <a href="index.html">
@@ -705,7 +747,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Innovative Agricultural Solutions for Maharashtra's Farmers</h1>
@@ -714,7 +755,6 @@
         </div>
     </section>
 
-    <!-- Slideshow Section -->
     <section class="slideshow-section">
         <div class="slideshow-container">
             <div class="slide active">
@@ -732,7 +772,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about-section">
         <div class="section-title">
             <h2>About Crop Connect Agro</h2>
@@ -752,56 +791,374 @@
         </div>
     </section>
 
-    <!-- Products Section -->
     <section class="products-section">
         <div class="section-title">
             <h2>Our Featured Products</h2>
         </div>
         
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="https://i.ibb.co/d0x6q25P/Connect-STIC.png" alt="Connect STIC" class="product-img">
+        <div class="product-slider-wrapper">
+            <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            
+            <div class="product-slider-track">
+                
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/banjar connect.jpg" alt="Banjar Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Banjar Connect</h3>
+                        <span class="subtitle">बंजर कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h3>Connect STIC</h3>
-                    <a href="products.html" class="btn">View Product</a>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/liger connect.jpg" alt="Liger Connect" class="product-img" onerror="this.src='https://via.placeholder.com/280x220?text=Image+Not+Found'">
+                    </div>
+                    <div class="product-info">
+                        <h3>Liger Connect</h3>
+                        <span class="subtitle">लाईगर कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
                 </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect anti-ka.jpg" alt="Connect Anti-KA" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Anti-KA</h3>
+                        <span class="subtitle">कनेक्ट अँटी-का</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/nemato connect.jpg" alt="Nemato Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Nemato Connect</h3>
+                        <span class="subtitle">निमॅटो कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect step-two.jpg" alt="Connect Step-Two" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Step-Two</h3>
+                        <span class="subtitle">स्टेप-टू कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/seaweed connect.jpg" alt="Seaweed Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Seaweed Connect</h3>
+                        <span class="subtitle">सिविड कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect zyme.jpg" alt="Connect Zyme" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Zyme</h3>
+                        <span class="subtitle">कनेक्ट झाइम</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/asco connect.jpg" alt="Asco Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Asco Connect</h3>
+                        <span class="subtitle">अस्को कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/all connect.jpg" alt="All Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>All Connect</h3>
+                        <span class="subtitle">ऑल कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect sw gr.jpg" alt="Connect SW GR" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect SW GR</h3>
+                        <span class="subtitle">कनेक्ट एस. डब्ल्यू. जी. आर.</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect block blaster.jpg" alt="Connect Block Blaster" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Block Blaster</h3>
+                        <span class="subtitle">कनेक्ट ब्लॉक ब्लास्टर</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/carbo-n connect.jpg" alt="Carbo-N Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Carbo-N Connect</h3>
+                        <span class="subtitle">कार्बो-एन कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/hi-vaa connect.jpg" alt="Hi-VAA Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Hi-VAA Connect</h3>
+                        <span class="subtitle">हाय-व्ही ए ए कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect alffa.jpg" alt="Connect Alffa" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Alffa</h3>
+                        <span class="subtitle">कनेक्ट अल्फा</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/amino connect.jpg" alt="Amino Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Amino Connect</h3>
+                        <span class="subtitle">अमिनो कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/amino connect-l.jpg" alt="Amino Connect-L" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Amino Connect-L</h3>
+                        <span class="subtitle">अमिनो कनेक्ट- एल</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect fert.jpg" alt="Connect Fert" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Fert</h3>
+                        <span class="subtitle">कनेक्ट फर्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect baazigar.jpg" alt="Connect Baazigar" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Baazigar</h3>
+                        <span class="subtitle">कनेक्ट बाजीगर</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect chairman.jpg" alt="Connect Chairman" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Chairman</h3>
+                        <span class="subtitle">कनेक्ट चेअरमन</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/root connect.jpg" alt="Root Connect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Root Connect</h3>
+                        <span class="subtitle">रूट कनेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/root connect plus.jpg" alt="Root Connect Plus" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Root Connect Plus</h3>
+                        <span class="subtitle">रूट कनेक्ट plus</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect rx 100.jpg" alt="Connect RX 100" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect RX 100</h3>
+                        <span class="subtitle">कनेक्ट आर एक्स 100</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/root connect-l.jpg" alt="Root Connect-L" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Root Connect-L</h3>
+                        <span class="subtitle">रूट कनेक्ट-एल</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect hf gr.jpg" alt="Connect HF GR" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect HF GR</h3>
+                        <span class="subtitle">कनेक्ट एच. एफ. जी. आर</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect h 51 gr.jpg" alt="Connect H 51 GR" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect H 51 GR</h3>
+                        <span class="subtitle">कनेक्ट एच 51 जी आर</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect flora.jpg" alt="Connect Flora" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Flora</h3>
+                        <span class="subtitle">कनेक्ट फ्लोरा</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect perfect.jpg" alt="Connect Perfect" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Perfect</h3>
+                        <span class="subtitle">कनेक्ट परफेक्ट</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect rajdoot.jpg" alt="Connect Rajdoot" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Rajdoot</h3>
+                        <span class="subtitle">कनेक्ट राजदूत</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect stic.jpg" alt="Connect Stic" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Stic</h3>
+                        <span class="subtitle">कनेक्ट स्टिक</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect sizer.jpg" alt="Connect Sizer" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Sizer</h3>
+                        <span class="subtitle">कनेक्ट सायझर</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect b.jpg" alt="Connect B" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect B</h3>
+                        <span class="subtitle">कनेक्ट बी</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
+                <div class="product-slide-card">
+                    <div class="product-img-container">
+                        <img src="images/connect blend.jpg" alt="Connect Blend" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>Connect Blend</h3>
+                        <span class="subtitle">कनेक्ट ब्लेंड</span>
+                        <a href="products.html" class="btn">View Product</a>
+                    </div>
+                </div>
+
             </div>
             
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="https://i.ibb.co/0yBy5WX4/Root-connect.jpg" alt="Root Connect" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3>Root Connect</h3>
-                    <a href="products.html" class="btn">View Product</a>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="https://i.ibb.co/jkRx542k/Amino-Connect.jpg" alt="Amino Connect" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3>Amino Connect</h3>
-                    <a href="products.html" class="btn">View Product</a>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="https://i.ibb.co/DH1YWpG1/Root-Connect-Plus.png" alt="Root Connect Plus" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3>Root Connect Plus</h3>
-                    <a href="products.html" class="btn">View Product</a>
-                </div>
-            </div>
+            <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section class="testimonials-section">
         <div class="section-title">
             <h2>What Farmers Say</h2>
@@ -831,7 +1188,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-content">
             <h2>Ready to Transform Your Farming?</h2>
@@ -840,7 +1196,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -932,6 +1287,78 @@
             // Initialize scroll animations
             window.addEventListener('scroll', animateOnScroll);
             window.addEventListener('load', animateOnScroll);
+
+            // Product Slider Functionality (Robust Auto-Slide)
+            const sliderTrack = document.querySelector('.product-slider-track');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const sliderWrapper = document.querySelector('.product-slider-wrapper');
+            
+            if (sliderTrack && prevBtn && nextBtn) {
+                let autoSlideInterval;
+                
+                // Determine the width to scroll
+                const getScrollAmount = () => {
+                    const card = sliderTrack.querySelector('.product-slide-card');
+                    const gap = parseInt(window.getComputedStyle(sliderTrack).gap || 0);
+                    return card.offsetWidth + gap;
+                };
+
+                const scrollNext = () => {
+                    // If we've reached the end of the scrollable area, snap back to the start smoothly
+                    if (sliderTrack.scrollLeft + sliderTrack.clientWidth >= sliderTrack.scrollWidth - 10) {
+                        sliderTrack.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        sliderTrack.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                    }
+                };
+
+                const scrollPrev = () => {
+                    // If we are at the beginning, snap to the end smoothly
+                    if (sliderTrack.scrollLeft <= 0) {
+                        sliderTrack.scrollTo({ left: sliderTrack.scrollWidth, behavior: 'smooth' });
+                    } else {
+                        sliderTrack.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                    }
+                };
+
+                // Manual Controls
+                nextBtn.addEventListener('click', () => { 
+                    scrollNext(); 
+                    resetInterval(); 
+                });
+                
+                prevBtn.addEventListener('click', () => { 
+                    scrollPrev(); 
+                    resetInterval(); 
+                });
+
+                // Auto Slide Setup
+                const startAutoSlide = () => {
+                    autoSlideInterval = setInterval(scrollNext, 3000); // Slides every 3 seconds
+                };
+
+                const stopAutoSlide = () => {
+                    clearInterval(autoSlideInterval);
+                };
+
+                const resetInterval = () => {
+                    stopAutoSlide();
+                    startAutoSlide();
+                };
+
+                // Pause the auto-slider when the user hovers or touches it
+                sliderWrapper.addEventListener('mouseenter', stopAutoSlide);
+                sliderWrapper.addEventListener('mouseleave', startAutoSlide);
+                sliderWrapper.addEventListener('touchstart', stopAutoSlide, {passive: true});
+                sliderWrapper.addEventListener('touchend', () => {
+                    // Brief delay before resuming after touch interaction
+                    setTimeout(startAutoSlide, 2000);
+                });
+
+                // Start the loop
+                startAutoSlide();
+            }
         });
     </script>
 </body>
